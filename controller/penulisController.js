@@ -70,10 +70,10 @@ async function login(req, res) {
         nama: penulis.nama,
         email: penulis.email,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || "mysupersecretkey123",
       {
-        expiresIn: process.env.JWT_EXPIRES,
-      },
+        expiresIn: process.env.JWT_EXPIRES_IN || "1d", // 👈 Tambahkan _IN dan fallback "1d"
+      }
     );
 
     return res.status(200).json({
